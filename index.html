@@ -1,84 +1,170 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Galeria</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #e6f2e6; /* verde claro */
-            color: #006600; /* verde escuro */
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minha Galeria - Grau Técnico</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e6f2e6;
+    color: #006600;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+header {
+    background-color: #006600;
+    color: #fff;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+header img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 5px;
+}
+h1 { margin: 0; font-size: 24px; }
+h2 { margin-top: 40px; }
+section { padding: 20px; }
+/* Galeria */
+.gallery img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: 0.3s;
+}
+.gallery img:hover { transform: scale(1.05); }
+audio, video { margin: 10px; width: 300px; }
+footer {
+    background-color: #006600;
+    color: #fff;
+    padding: 10px 0;
+    margin-top: 20px;
+}
 
-        header {
-            background-color: #006600;
-            color: #fff;
-            padding: 20px 0;
-        }
-
-        h1 {
-            margin: 0;
-        }
-
-        section {
-            padding: 20px;
-        }
-
-        .gallery img, .gallery video {
-            width: 300px;
-            margin: 10px;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-        }
-
-        audio {
-            margin: 10px;
-            width: 300px;
-        }
-
-        footer {
-            background-color: #006600;
-            color: #fff;
-            padding: 10px 0;
-            margin-top: 20px;
-        }
-    </style>
+/* Lightbox com navegação */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+.lightbox-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 80%;
+}
+.close, .prev, .next {
+    position: absolute;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+}
+.close { top: 30px; right: 35px; }
+.prev { top: 50%; left: 30px; transform: translateY(-50%); }
+.next { top: 50%; right: 30px; transform: translateY(-50%); }
+</style>
 </head>
 <body>
-    <header>
-        <h1>Minha Galeria de Mídia</h1>
-        <p>Fotos, vídeos e músicas em um só lugar</p>
-    </header>
+<header>
+    <img src="imagens/logo1.png" alt="Logo do Curso">
+    <h1><strong>Grau Técnico - STB</strong></h1>
+</header>
 
-    <section class="gallery">
-        <h2>Fotos</h2>
-        
-    <audio controls>
-    <source src="musicas/musica1.mp3" type="audio/mpeg">
-    Seu navegador não suporta áudio.
-    </audio>
-       
-        <img src="imagens/foto1.jpg" alt="Foto 1">
-        <img src="imagens/foto2.jpg" alt="Foto 2">
-        <img src="imagens/foto3.jpg" alt="Foto 2">
-        <img src="imagens/foto4.jpg" alt="Foto 2">
-        <img src="imagens/foto5.jpg" alt="Foto 2">
-        <img src="imagens/foto6.jpg" alt="Foto 2">
-        <img src="imagens/foto7.jpg" alt="Foto 2">
-        <img src="imagens/foto8.jpg" alt="Foto 2">
-        <img src="imagens/foto9.jpg" alt="Foto 2">
-        <img src="imagens/foto10.jpg" alt="Foto 2">
+<section class="gallery">
+<h2>Fotos</h2>
+
+<!-- Áudio automático com fallback para clique -->
+<script>
+const audio = new Audio('musicas/musica1.mp3');
+audio.loop = true;
+window.addEventListener('load', () => {
+    audio.play().catch(() => {
+        document.body.addEventListener('click', () => { audio.play(); }, { once: true });
+    });
+});
+</script>
+
+<img src="imagens/foto1.jpg" alt="Foto 1">
+<img src="imagens/foto2.jpg" alt="Foto 2">
+<img src="imagens/foto3.jpg" alt="Foto 3">
+<img src="imagens/foto4.jpg" alt="Foto 4">
+<img src="imagens/foto5.jpg" alt="Foto 5">
+<img src="imagens/foto6.jpg" alt="Foto 6">
+<img src="imagens/foto7.jpg" alt="Foto 7">
+<img src="imagens/foto8.jpg" alt="Foto 8">
+<img src="imagens/foto9.jpg" alt="Foto 9">
+<img src="imagens/foto10.jpg" alt="Foto 10">
 
 
 
-    </section>
+<!-- Lightbox container -->
+<div id="lightbox" class="lightbox">
+    <span class="close">&times;</span>
+    <span class="prev">&#10094;</span>
+    <span class="next">&#10095;</span>
+    <img class="lightbox-content" id="lightbox-img">
+</div>
 
-    <footer>
-        &copy; 2025 Minha Galeria
-    </footer>
+<footer>&copy; 2025 Grau técnico </footer>
+
+<script>
+// Lightbox com navegação
+const images = document.querySelectorAll('.gallery img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const close = document.querySelector('.close');
+const prev = document.querySelector('.prev');
+const next = document.querySelector('.next');
+let currentIndex = 0;
+
+// abrir lightbox
+images.forEach((img, index) => {
+    img.addEventListener('click', () => {
+        lightbox.style.display = 'block';
+        lightboxImg.src = img.src;
+        currentIndex = index;
+    });
+});
+
+// fechar lightbox
+close.addEventListener('click', () => { lightbox.style.display = 'none'; });
+
+// navegação
+prev.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    lightboxImg.src = images[currentIndex].src;
+});
+next.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % images.length;
+    lightboxImg.src = images[currentIndex].src;
+});
+
+// fechar clicando fora da imagem
+lightbox.addEventListener('click', e => {
+    if(e.target === lightbox) lightbox.style.display = 'none';
+});
+</script>
 </body>
 </html>
