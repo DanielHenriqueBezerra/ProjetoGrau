@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Minha Galeria - Grau Técnico</title>
+<title>Grau Técnico</title>
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -110,11 +110,11 @@ footer {
 
 <header>
     <img src="imagens/stb/logo1.png" alt="Logo do Curso">
-    <h1><strong>Grau Técnico - STB</strong></h1>
+    <h1><strong>Grau Técnico </strong></h1>
 </header>
 
 <!-- Seção Grau Técnico -->
-<h2>Grau Técnico</h2>
+<h2> <strong>Grau STB</strong></h2>
 <section class="gallery">
 <audio id="audio" loop autoplay>
     <source src="musicas/musica1.mp3" type="audio/mpeg">
@@ -132,7 +132,7 @@ footer {
 </section>
 
 <!-- Seção Grau Eletrônica ELT -->
-<h2>Grau Eletrônica ELT</h2>
+<h2><strong>Grau ELT</strong></h2>
 <section class="gallery">
 <img src="imagens/ELT/foto1.jpg" alt="ELT 1">
 <img src="imagens/ELT/foto2.jpg" alt="ELT 2">
@@ -170,6 +170,12 @@ window.addEventListener('load', () => {
         document.body.addEventListener('click', () => { audio.play(); }, { once: true });
     });
 });
+
+// Pausar/retomar áudio com vídeo
+const video = document.querySelector('video');
+video.addEventListener('play', () => audio.pause());
+video.addEventListener('pause', () => audio.play());
+video.addEventListener('ended', () => audio.play());
 
 // Lightbox com slideshow automático
 const images = document.querySelectorAll('.gallery img');
