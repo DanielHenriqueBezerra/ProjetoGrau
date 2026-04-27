@@ -5,115 +5,116 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dia das Mães - Grau Técnico</title>
 
-<script src="https://cdn.tailwindcss.com"></script>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;500;600&display=swap" rel="stylesheet">
-
 <style>
-html, body { height: 100%; margin: 0; }
-.font-heading { font-family: 'Playfair Display', Georgia, serif; }
-.font-body { font-family: 'Source Sans 3', sans-serif; }
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
-.anim-fade-up { animation: fadeUp 0.8s ease-out both; }
+
+header {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg,#0a5524,#3a9a55);
+  color: white;
+}
+
+.video-grid {
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
 
 .video-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: 0.3s;
 }
+
 .video-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0,80,40,0.12);
+  transform: translateY(-5px);
+}
+
+video {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  background: #000;
+  display: block;
 }
 </style>
 </head>
 
-<body class="h-full font-body" style="background-color: #ffffff;">
+<body>
 
-<header class="text-center py-20" style="background: linear-gradient(135deg,#0a5524,#3a9a55); color:white;">
-<h1 class="font-heading text-5xl font-bold">Homenagem ao Dia das Mães</h1>
-<p class="mt-4">O Grau Técnico celebra o amor, a força e a dedicação de todas as mães.</p>
-<a href="#videos" class="mt-6 inline-block bg-white text-green-900 px-6 py-3 rounded-full">Assistir vídeos</a>
+<header>
+<h1>Homenagem ao Dia das Mães</h1>
+<p>Grau Técnico</p>
 </header>
 
-<section id="videos" class="max-w-6xl mx-auto p-6">
-<h2 class="text-3xl font-heading text-center mb-10">Mensagens Especiais</h2>
-<div id="video-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
-</section>
-
-<footer class="text-center py-10" style="background:#042d13;color:white;">
-<p class="text-2xl font-heading">Feliz Dia das Mães ❤️</p>
-<p class="text-sm mt-2">Com carinho, Grau Técnico</p>
-</footer>
+<section class="video-grid" id="video-grid"></section>
 
 <script>
 const videos = [
-  { src: 'videos/video1.mp4' },
+  'videos/video1.mp4',
 ];
 
 const grid = document.getElementById("video-grid");
 
 let currentVideo = null;
 
-videos.forEach(video => {
-  const div = document.createElement("div");
-  div.className = "video-card bg-white rounded-xl overflow-hidden anim-fade-up";
+videos.forEach(src => {
+  const card = document.createElement("div");
+  card.className = "video-card";
 
-  div.innerHTML = `
-    <video 
-      class="preview-video"
-      muted
-      loop
-      playsinline
-      preload="metadata"
-      style="width:100%; height:250px; object-fit:cover; background:#000"
-    >
-      <source src="${video.src}" type="video/mp4">
+  card.innerHTML = `
+    <video muted loop playsinline preload="metadata">
+      <source src="${src}" type="video/mp4">
     </video>
   `;
 
-  const vid = div.querySelector("video");
+  const video = card.querySelector("video");
 
-  // 🔧 CORREÇÃO REAL: evitar conflito play/pause
   function playVideo() {
-    if (currentVideo && currentVideo !== vid) {
+    // pausa outro vídeo
+    if (currentVideo && currentVideo !== video) {
       currentVideo.pause();
       currentVideo.currentTime = 0;
     }
 
-    currentVideo = vid;
+    currentVideo = video;
 
-    const playPromise = vid.play();
+    // CORREÇÃO PRINCIPAL (evita DOMException)
+    const playPromise = video.play();
     if (playPromise !== undefined) {
       playPromise.catch(() => {});
     }
   }
 
   function stopVideo() {
-    vid.pause();
-    vid.currentTime = 0;
+    video.pause();
+    video.currentTime = 0;
 
-    if (currentVideo === vid) {
+    if (currentVideo === video) {
       currentVideo = null;
     }
   }
 
   // 💻 Desktop
-  div.addEventListener("mouseenter", playVideo);
-  div.addEventListener("mouseleave", stopVideo);
+  card.addEventListener("mouseenter", playVideo);
+  card.addEventListener("mouseleave", stopVideo);
 
   // 📱 Mobile
-  div.addEventListener("click", () => {
-    if (vid.paused) {
-      playVideo();
-    } else {
-      stopVideo();
-    }
+  card.addEventListener("click", () => {
+    if (video.paused) playVideo();
+    else stopVideo();
   });
 
-  grid.appendChild(div);
+  grid.appendChild(card);
 });
 </script>
 
