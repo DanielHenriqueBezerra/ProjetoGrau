@@ -5,88 +5,64 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dia das Mães - Grau Técnico</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
-
 <style>
-* {
+body {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html, body {
-  width: 100%;
-  height: 100%;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: Arial, sans-serif;
   background: #fff;
-  color: #042d13;
 }
 
-/* HERO */
-.hero {
+header {
   background: linear-gradient(135deg,#0a5524,#3a9a55);
-  padding: 60px 20px;
-  text-align: center;
   color: white;
+  text-align: center;
+  padding: 60px 20px;
 }
 
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 48px;
+header h1 {
+  margin: 0;
 }
 
-.hero p {
-  margin-top: 10px;
-}
-
-/* VIDEOS */
 .video-grid {
   max-width: 1100px;
   margin: auto;
-  padding: 50px 20px;
+  padding: 40px 20px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
 }
 
 .video-card {
-  background: #fff;
   border: 1px solid #d5ebda;
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
+  background: #000;
 }
 
 video {
   width: 100%;
   height: 250px;
   object-fit: cover;
-  background: #000;
   display: block;
+  background: black;
 }
-
-/* FOOTER */
-footer {
-  background: #042d13;
-  color: white;
-  text-align: center;
-  padding: 30px;
+.error {
+  color: red;
+  font-size: 14px;
+  padding: 10px;
+  background: #fff;
 }
 </style>
 </head>
 
 <body>
 
-<header class="hero">
+<header>
   <h1>Homenagem ao Dia das Mães</h1>
   <p>Grau Técnico</p>
 </header>
 
-<section class="video-grid" id="videoGrid"></section>
-
-<footer>
-  <h2>Feliz Dia das Mães ❤️</h2>
-  <p>Com carinho, Grau Técnico</p>
-</footer>
+<section class="video-grid" id="grid"></section>
 
 <script>
 const videos = [
@@ -99,42 +75,54 @@ const videos = [
   'videos/video7.mp4'
 ];
 
-const grid = document.getElementById("videoGrid");
+const grid = document.getElementById("grid");
 
-let currentVideo = null;
+let current = null;
 
-videos.forEach(src => {
+videos.forEach((src, index) => {
   const card = document.createElement("div");
   card.className = "video-card";
 
   card.innerHTML = `
-    <video muted loop playsinline preload="metadata">
+    <video muted playsinline preload="metadata">
       <source src="${src}" type="video/mp4">
     </video>
+    <div class="error" id="err-${index}" style="display:none;"></div>
   `;
 
   const video = card.querySelector("video");
+  const errorBox = card.querySelector(".error");
+
+  // 🔴 ERRO VISÍVEL (AGORA VOCÊ SABE SE NÃO CARREGAR)
+  video.addEventListener("error", () => {
+    errorBox.style.display = "block";
+    errorBox.textContent = "❌ Vídeo não encontrado: " + src;
+  });
 
   function playVideo() {
-    if (currentVideo && currentVideo !== video) {
-      currentVideo.pause();
-      currentVideo.currentTime = 0;
+    if (current && current !== video) {
+      current.pause();
+      current.currentTime = 0;
     }
+    current = video;
 
-    currentVideo = video;
-
-    video.play().catch(() => {});
+    const p = video.play();
+    if (p !== undefined) {
+      p.catch(() => {});
+    }
   }
 
   function stopVideo() {
     video.pause();
     video.currentTime = 0;
-    if (currentVideo === video) currentVideo = null;
+    if (current === video) current = null;
   }
 
+  // PC
   card.addEventListener("mouseenter", playVideo);
   card.addEventListener("mouseleave", stopVideo);
 
+  // MOBILE
   card.addEventListener("click", () => {
     if (video.paused) playVideo();
     else stopVideo();
