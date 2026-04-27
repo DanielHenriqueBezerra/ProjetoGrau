@@ -7,7 +7,7 @@
 
 <script src="https://cdn.tailwindcss.com"></script>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;500;600&display=swap" rel="stylesheet">
 
 <style>
 html, body { height: 100%; margin: 0; }
@@ -51,12 +51,16 @@ html, body { height: 100%; margin: 0; }
 <script>
 const videos = [
   { src: 'videos/video1.mp4' },
- 
 ];
 
 const grid = document.getElementById("video-grid");
 
-let currentVideo = null; // controla vídeo ativo
+let currentVideo = null;
+
+function safePlay(video) {
+  if (!video) return;
+  video.play().catch(() => {});
+}
 
 videos.forEach(video => {
   const div = document.createElement("div");
@@ -82,28 +86,23 @@ videos.forEach(video => {
       currentVideo.currentTime = 0;
     }
     currentVideo = vid;
-    vid.play();
+    safePlay(vid);
   }
 
   function stopVideo() {
     vid.pause();
     vid.currentTime = 0;
-    if (currentVideo === vid) {
-      currentVideo = null;
-    }
+    if (currentVideo === vid) currentVideo = null;
   }
 
-  // 💻 Desktop
+  // 💻 desktop
   div.addEventListener("mouseenter", playVideo);
   div.addEventListener("mouseleave", stopVideo);
 
-  // 📱 Mobile
+  // 📱 mobile
   div.addEventListener("click", () => {
-    if (vid.paused) {
-      playVideo();
-    } else {
-      stopVideo();
-    }
+    if (vid.paused) playVideo();
+    else stopVideo();
   });
 
   grid.appendChild(div);
