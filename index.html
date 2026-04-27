@@ -1,489 +1,148 @@
 <!doctype html>
 <html lang="pt-BR">
- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dia das Mães - Grau Técnico</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Source+Sans+Pro:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
-  <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dia das Mães - Grau Técnico</title>
 
-        html, body {
-            width: 100%;
-            height: 100%;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-        body {
-            font-family: 'Source Sans Pro', sans-serif;
-            background-color: #ffffff;
-            color: #042d13;
-            overflow-x: hidden;
-        }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-        /* HERO SECTION */
-        .hero {
-            position: relative;
-            background: linear-gradient(135deg, #0a5524 0%, #1a7a3a 40%, #3a9a55 100%);
-            padding: 60px 20px 100px;
-            text-align: center;
-            overflow: hidden;
-            min-height: 500px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Source Sans Pro', sans-serif;
+  background: #fff;
+  color: #042d13;
+}
 
-        /* Floating hearts */
-        .hearts {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
+/* HERO */
+.hero {
+  background: linear-gradient(135deg,#0a5524,#3a9a55);
+  padding: 60px 20px;
+  text-align: center;
+  color: white;
+}
 
-        .heart {
-            position: absolute;
-            font-size: 60px;
-            color: rgba(255, 255, 255, 0.15);
-            animation: float 6s ease-in-out infinite;
-        }
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+}
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) scale(1); opacity: 0.15; }
-            50% { transform: translateY(-30px) scale(1.1); opacity: 0.25; }
-        }
+.hero p {
+  margin-top: 10px;
+}
 
-        .heart:nth-child(1) { top: 10%; left: 8%; animation-delay: 0s; font-size: 80px; }
-        .heart:nth-child(2) { top: 25%; right: 12%; animation-delay: 1s; font-size: 50px; }
-        .heart:nth-child(3) { bottom: 15%; left: 20%; animation-delay: 2s; font-size: 70px; }
-        .heart:nth-child(4) { top: 60%; right: 25%; animation-delay: 0.5s; font-size: 40px; }
-        .heart:nth-child(5) { bottom: 10%; right: 8%; animation-delay: 1.5s; font-size: 90px; }
+/* VIDEOS */
+.video-grid {
+  max-width: 1100px;
+  margin: auto;
+  padding: 50px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
 
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            max-width: 700px;
-            margin: 0 auto;
-            animation: slideUp 0.8s ease-out;
-        }
+.video-card {
+  background: #fff;
+  border: 1px solid #d5ebda;
+  border-radius: 12px;
+  overflow: hidden;
+}
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+video {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  background: #000;
+  display: block;
+}
 
-        .hero-badge {
-            display: inline-block;
-            padding: 8px 20px;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50px;
-            color: #d5ebda;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
+/* FOOTER */
+footer {
+  background: #042d13;
+  color: white;
+  text-align: center;
+  padding: 30px;
+}
+</style>
+</head>
 
-        .hero h1 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(32px, 8vw, 72px);
-            font-weight: 700;
-            color: #ffffff;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            letter-spacing: -0.5px;
-        }
+<body>
 
-        .hero p {
-            font-size: clamp(16px, 3vw, 20px);
-            color: #d5ebda;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            font-weight: 300;
-        }
+<header class="hero">
+  <h1>Homenagem ao Dia das Mães</h1>
+  <p>Grau Técnico</p>
+</header>
 
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 32px;
-            background: #ffffff;
-            color: #0a5524;
-            font-size: 16px;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-        }
+<section class="video-grid" id="videoGrid"></section>
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
+<footer>
+  <h2>Feliz Dia das Mães ❤️</h2>
+  <p>Com carinho, Grau Técnico</p>
+</footer>
 
-        /* VIDEOS SECTION */
-        .videos-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 80px 20px;
-        }
+<script>
+const videos = [
+  'videos/video1.mp4',
+  'videos/video2.mp4',
+  'videos/video3.mp4',
+  'videos/video4.mp4',
+  'videos/video5.mp4',
+  'videos/video6.mp4',
+  'videos/video7.mp4'
+];
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
+const grid = document.getElementById("videoGrid");
 
-        .section-divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
+let currentVideo = null;
 
-        .divider-line {
-            width: 40px;
-            height: 2px;
-            background: #1a7a3a;
-            border-radius: 2px;
-        }
+videos.forEach(src => {
+  const card = document.createElement("div");
+  card.className = "video-card";
 
-        .section-label {
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: #1a7a3a;
-        }
+  card.innerHTML = `
+    <video muted loop playsinline preload="metadata">
+      <source src="${src}" type="video/mp4">
+    </video>
+  `;
 
-        .section-header h2 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(28px, 6vw, 48px);
-            font-weight: 700;
-            color: #042d13;
-            margin: 0;
-        }
+  const video = card.querySelector("video");
 
-        /* Video Grid */
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
+  function playVideo() {
+    if (currentVideo && currentVideo !== video) {
+      currentVideo.pause();
+      currentVideo.currentTime = 0;
+    }
 
-        @media (max-width: 768px) {
-            .video-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-        }
+    currentVideo = video;
 
-        .video-card {
-            background: #ffffff;
-            border: 1px solid #d5ebda;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
+    video.play().catch(() => {});
+  }
 
-        .video-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 50px rgba(10, 85, 36, 0.12);
-        }
+  function stopVideo() {
+    video.pause();
+    video.currentTime = 0;
+    if (currentVideo === video) currentVideo = null;
+  }
 
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            background: #0a5524;
-            overflow: hidden;
-        }
+  card.addEventListener("mouseenter", playVideo);
+  card.addEventListener("mouseleave", stopVideo);
 
-        .video-container video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+  card.addEventListener("click", () => {
+    if (video.paused) playVideo();
+    else stopVideo();
+  });
 
-        .video-info {
-            padding: 20px;
-        }
+  grid.appendChild(card);
+});
+</script>
 
-        .video-title {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 18px;
-            font-weight: 600;
-            color: #042d13;
-            margin-bottom: 8px;
-        }
-
-        .video-caption {
-            font-size: 14px;
-            color: #6db87e;
-        }
-
-        /* INSTITUTIONAL SECTION */
-        .institutional {
-            background: #eef7f0;
-            padding: 80px 20px;
-            text-align: center;
-        }
-
-        .institutional-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .heart-icon {
-            font-size: 60px;
-            margin-bottom: 30px;
-            display: block;
-        }
-
-        .institutional p {
-            font-size: clamp(16px, 3vw, 20px);
-            line-height: 1.8;
-            color: #07401b;
-            margin-bottom: 30px;
-        }
-
-        .divider-hearts {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            color: #6db87e;
-            margin-top: 20px;
-        }
-
-        .divider-hearts span {
-            display: inline-block;
-            width: 30px;
-            height: 1px;
-            background: #6db87e;
-        }
-
-        /* FOOTER */
-        footer {
-            background: #042d13;
-            color: #a8d6b4;
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        footer h3 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(20px, 4vw, 36px);
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 10px;
-        }
-
-        footer p {
-            font-size: 14px;
-            color: #6db87e;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .video-card {
-            animation: fadeInUp 0.6s ease-out both;
-        }
-
-        .video-card:nth-child(1) { animation-delay: 0.1s; }
-        .video-card:nth-child(2) { animation-delay: 0.2s; }
-        .video-card:nth-child(3) { animation-delay: 0.3s; }
-        .video-card:nth-child(4) { animation-delay: 0.4s; }
-        .video-card:nth-child(5) { animation-delay: 0.5s; }
-        .video-card:nth-child(6) { animation-delay: 0.6s; }
-        .video-card:nth-child(7) { animation-delay: 0.7s; }
-
-        /* Responsive adjustments */
-        @media (max-width: 480px) {
-            .hero {
-                padding: 40px 15px 60px;
-                min-height: 400px;
-            }
-
-            .hero h1 {
-                font-size: 28px;
-            }
-
-            .videos-section {
-                padding: 50px 15px;
-            }
-
-            .institutional {
-                padding: 50px 15px;
-            }
-        }
-    </style>
-  <style>body { box-sizing: border-box; }</style>
-  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
-  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
- </head>
- <body><!-- HERO SECTION -->
-  <header class="hero">
-   <div class="hearts">
-    <div class="heart">
-     ♥
-    </div>
-    <div class="heart">
-     ♥
-    </div>
-    <div class="heart">
-     ♥
-    </div>
-    <div class="heart">
-     ♥
-    </div>
-    <div class="heart">
-     ♥
-    </div>
-   </div>
-   <div class="hero-content">
-    <div class="hero-badge">
-     Grau Técnico
-    </div>
-    <h1>Homenagem ao Dia das Mães</h1>
-    <p>O Grau Técnico celebra o amor, a força e a dedicação de todas as mães que fazem a diferença todos os dias.</p><button class="cta-button" onclick="document.getElementById('videos').scrollIntoView({ behavior: 'smooth' })"> ▶ Assistir aos vídeos </button>
-   </div>
-  </header><!-- VIDEOS SECTION -->
-  <section id="videos" class="videos-section">
-   <div class="section-header">
-    <div class="section-divider">
-     <div class="divider-line"></div><span class="section-label">Vídeos</span>
-     <div class="divider-line"></div>
-    </div>
-    <h2>Mensagens Especiais</h2>
-   </div>
-   <div class="video-grid" id="videoGrid"></div>
-  </section><!-- INSTITUTIONAL SECTION -->
-  <section class="institutional">
-   <div class="institutional-content"><span class="heart-icon">♥</span>
-    <p>No Grau Técnico, reconhecemos a importância das mães como pilares fundamentais na formação de valores, sonhos e conquistas. Esta é uma pequena homenagem para celebrar todo o amor e dedicação que elas representam em nossas vidas.</p>
-    <div class="divider-hearts"><span></span> <span>♥</span> <span></span>
-    </div>
-   </div>
-  </section><!-- FOOTER -->
-  <footer>
-   <h3>Feliz Dia das Mães ❤️</h3>
-   <p>Com carinho, Grau Técnico</p>
-  </footer>
-  <script>
-        // Video data
-        const videos = [
-            { id: 1, title: 'Mensagem Especial 01', caption: 'Uma homenagem de coração' },
-            //{ id: 2, title: 'Homenagem 02', caption: 'Força e dedicação' },
-            //{ id: 3, title: 'Homenagem 03', caption: 'O amor que transforma' },
-           // { id: 4, title: 'Mensagem Especial 04', caption: 'Gratidão eterna' },
-            //{ id: 5, title: 'Homenagem 05', caption: 'Mães que inspiram' },
-            //{ id: 6, title: 'Mensagem Especial 06', caption: 'Carinho sem igual' },
-            //{ id: 7, title: 'Homenagem 07', caption: 'Para sempre no coração' }
-        ];
-
-        let currentPlayingVideo = null;
-
-        function renderVideos() {
-            const grid = document.getElementById('videoGrid');
-            grid.innerHTML = '';
-
-            videos.forEach((video, index) => {
-                const card = document.createElement('div');
-                card.className = 'video-card';
-
-                const videoSrc = `videos/video${index + 1}.mp4`;
-
-                card.innerHTML = `
-                    <div class="video-container">
-                        <video muted data-video-id="${video.id}">
-                            <source src="${videoSrc}" type="video/mp4">
-                            Seu navegador não suporta reprodução de vídeo.
-                        </video>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">${video.title}</div>
-                        <div class="video-caption">${video.caption}</div>
-                    </div>
-                `;
-
-                grid.appendChild(card);
-
-                // Get the video element
-                const videoElement = card.querySelector('video');
-
-                // Desktop: hover to play
-                card.addEventListener('mouseenter', () => {
-                    stopAllVideos();
-                    currentPlayingVideo = videoElement;
-                    videoElement.play().catch(() => {});
-                });
-
-                // Desktop: mouse leave to pause
-                card.addEventListener('mouseleave', () => {
-                    videoElement.pause();
-                    videoElement.currentTime = 0;
-                });
-
-                // Mobile: click to toggle play/pause
-                card.addEventListener('click', (e) => {
-                    // Ignore if it's on desktop (has hover support)
-                    if (window.matchMedia('(hover: hover)').matches) {
-                        return;
-                    }
-
-                    e.preventDefault();
-                    if (videoElement.paused) {
-                        stopAllVideos();
-                        currentPlayingVideo = videoElement;
-                        videoElement.play().catch(() => {});
-                    } else {
-                        videoElement.pause();
-                        videoElement.currentTime = 0;
-                        currentPlayingVideo = null;
-                    }
-                });
-            });
-        }
-
-        function stopAllVideos() {
-            const allVideos = document.querySelectorAll('video');
-            allVideos.forEach(video => {
-                video.pause();
-                video.currentTime = 0;
-            });
-        }
-
-        // Render videos on page load
-        document.addEventListener('DOMContentLoaded', renderVideos);
-
-        // Stop all videos when user leaves the page
-        window.addEventListener('beforeunload', stopAllVideos);
-    </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f2e14f152c2d868',t:'MTc3NzI5NTU3OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
